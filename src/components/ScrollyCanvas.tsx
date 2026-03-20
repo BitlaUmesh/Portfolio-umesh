@@ -72,10 +72,14 @@ export default function ScrollyCanvas() {
       offsetX = (canvas.width - drawWidth) / 2;
     }
 
-    // Fill background
-    ctx.fillStyle = "#121212";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
     // Draw image centered and covering canvas
+    // Add 20% zoom to crop out the "Veo" watermark at the edges
+    const watermarkCropScale = 1.2;
+    drawWidth *= watermarkCropScale;
+    drawHeight *= watermarkCropScale;
+    offsetX = (canvas.width - drawWidth) / 2;
+    offsetY = (canvas.height - drawHeight) / 2;
+
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   }, [images]);
 

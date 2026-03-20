@@ -6,6 +6,11 @@
   body {
     background-color: #121212;
     color: #ffffff;
+    cursor: none;
+  }
+
+  *, a, button, input, textarea, [role="button"] {
+    cursor: none !important;
   }
 
   /* Custom Cyberpunk Scrollbar */

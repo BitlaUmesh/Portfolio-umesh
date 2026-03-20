@@ -133,7 +133,7 @@ export default function Experience() {
                 <motion.span
                   key={idx}
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
-                  className="px-4 py-2 bg-white/[0.03] border border-white/10 rounded-full text-white/80 text-sm font-mono backdrop-blur-sm transition-colors cursor-default"
+                  className="px-4 py-2 bg-white/[0.03] border border-white/10 rounded-full text-white/80 text-sm font-mono backdrop-blur-sm transition-colors"
                 >
                   {skill}
                 </motion.span>
