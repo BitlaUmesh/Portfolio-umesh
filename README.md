@@ -1,22 +1,22 @@
-# 🌌 Bitla Umesh | AI Engineer
+# 🌌 Bitla Umesh | Digital Architect & Systems Engineer
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-blue?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
-A high-performance, 3D interactive portfolio built for **Bitla Umesh Kumar**, featuring a dark cyberpunk aesthetic, smooth scrollytelling, and AI-native project showcases.
+A high-performance, 3D interactive portfolio built for **Bitla Umesh Kumar**, featuring a dark cyberpunk aesthetic, smooth scrollytelling, and sophisticated project showcases.
 
 > [!IMPORTANT]
-> This portfolio utilizes the **Anigravity Engine** for advanced 3D physics and canvas animations, delivering a cinematic user experience.
+> This portfolio utilizes a **Custom 3D Physics Engine** for advanced animations and interactive canvas elements, delivering a cinematic user experience.
 
 ---
 
 ## 🚀 Key Features
 
-- **3D Interactive Canvas**: Cinematic scrollytelling powered by a custom 3D animation engine.
+- **3D Interactive Canvas**: Cinematic scrollytelling powered by a custom-built 3D animation engine.
 - **Cyberpunk UI**: Minimalist yet vibrant dark-mode interface with glassmorphism and magnetic interactions.
-- **AI-Native Projects**: Showcasing advanced engineering in Security Orchestration and AI Inference.
+- **Advanced Engineering**: Showcasing complex systems in Security Orchestration and Real-time Inference.
 - **Smooth Navigation**: Integrated **Lenis** for momentum-based scrolling and **Framer Motion** for micro-animations.
 - **Responsive Architecture**: Fully optimized for cross-device high-performance rendering.
 
@@ -26,12 +26,12 @@ A high-performance, 3D interactive portfolio built for **Bitla Umesh Kumar**, fe
 
 - **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS, Lucide React.
 - **Animations**: Framer Motion, Lenis Scroll, Scramble Text effects.
-- **Engine**: Anigravity (3D/Physics).
-- **Backend/Tools**: FastAPI, Python, Firebase, Cursor AI, Git.
+- **Engine**: Custom 3D Physics & Canvas Engine.
+- **Backend/Tools**: FastAPI, Python, Firebase, Git.
 
 ---
 
-## 📂 Award-Winning Projects
+## 📂 Featured Projects
 
 ### 🛡️ SENTRY
 **Security Orchestration (Novus’24)**
@@ -39,7 +39,7 @@ A ChatOps-first SOAR platform utilizing FastAPI and Llama 3.1 to automate SOC al
 [View Repository](https://github.com/BitlaUmesh/SENTRY)
 
 ### 🧠 Neural-Sync
-**Real-time AI Inference (HackForge)**
+**Real-time Inference (HackForge)**
 IDE-native semantic merge engine that resolves stochastic merge conflicts by aligning NN outputs with structural code logic.
 [View Repository](https://github.com/BitlaUmesh/Neural_Sync)
 

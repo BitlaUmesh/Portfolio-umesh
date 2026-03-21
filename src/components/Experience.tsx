@@ -9,7 +9,7 @@ const experiences = [
     company: "YugaYatra Retail OPC Pvt. Ltd.",
     date: "Mar 2026 – May 2026",
     points: [
-      "Developing scalable web applications utilizing Cursor AI, Firebase Studio, and integrated AI technologies.",
+      "Developing scalable web applications utilizing modern IDEs, Firebase Studio, and cloud-native technologies.",
       "Contributing to live freelance projects and assisting in e-commerce deployments and seller portal management."
     ]
   },
@@ -33,7 +33,7 @@ const education = {
 };
 
 const skills = [
-  "Python", "C", "HTML", "CSS", "React", "FastAPI", "Streamlit", "ChromaDB", "Git", "Anigravity", "Cursor AI", "Firebase"
+  "Python", "C", "HTML", "CSS", "React", "FastAPI", "Streamlit", "ChromaDB", "Git", "Custom 3D Engine", "Firebase"
 ];
 
 export default function Experience() {
