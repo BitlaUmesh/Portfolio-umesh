@@ -56,8 +56,8 @@ IDE-native semantic merge engine that resolves stochastic merge conflicts by ali
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/BitlaUmesh/Portfolio_Antigravity.git
-   cd Portfolio_Antigravity
+   git clone https://github.com/BitlaUmesh/Portfolio-umesh.git
+   cd Portfolio-umesh
    ```
 
 2. **Install dependencies:**
