@@ -1,4 +1,4 @@
-# 🌌 Bitla Umesh | Digital Architect & AI Engineer
+# 🌌 Bitla Umesh | AI Engineer
 
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-blue?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
