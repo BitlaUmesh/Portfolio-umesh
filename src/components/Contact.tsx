@@ -2,36 +2,65 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, AlertCircle } from "lucide-react";
 import ScrambleText from "@/components/ScrambleText";
 import Magnetic from "@/components/Magnetic";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+
+const contactSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormValues = z.infer<typeof contactSchema>;
 
 export default function Contact() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("submitting");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+  });
 
-    const formData = new FormData(e.currentTarget);
-    // Access key configured via environment variables (.env.local)
+  const onSubmit = async (data: ContactFormValues) => {
+    setIsSubmitting(true);
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "";
+    const formData = new FormData();
     formData.append("access_key", accessKey);
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("message", data.message);
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData,
       });
-      const data = await res.json();
-      if (data.success) {
-        setStatus("success");
-        (e.target as HTMLFormElement).reset();
+      const resData = await res.json();
+      if (resData.success) {
+        toast.success("Transmission successful", {
+          description: "Message delivered to the mainframe. I'll be in touch soon.",
+        });
+        reset();
       } else {
-        setStatus("error");
+        toast.error("Transmission failed", {
+          description: "Could not deliver the message. Check your connection and try again.",
+        });
       }
     } catch {
-      setStatus("error");
+      toast.error("Transmission error", {
+        description: "An unexpected anomaly occurred. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -98,65 +127,66 @@ export default function Contact() {
                 <div className="h-[1px] w-full bg-gradient-to-r from-white/20 to-transparent" />
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-[9px] font-mono font-medium text-white/40 mb-2 uppercase tracking-widest px-1">Name</label>
                     <input 
                       type="text" 
-                      name="name" 
                       id="name" 
-                      required 
-                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.06] transition-all text-sm"
+                      {...register("name")}
+                      className={`w-full bg-white/[0.03] border ${errors.name ? 'border-red-500/50 focus:border-red-500/50' : 'border-white/5 focus:border-white/20'} rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:bg-white/[0.06] transition-all text-sm`}
                       placeholder="John Doe"
                     />
+                    {errors.name && (
+                      <p className="mt-2 text-[10px] text-red-400 flex items-center gap-1 font-mono">
+                        <AlertCircle className="w-3 h-3" /> {errors.name.message}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-[9px] font-mono font-medium text-white/40 mb-2 uppercase tracking-widest px-1">Email</label>
                     <input 
                       type="email" 
-                      name="email" 
                       id="email" 
-                      required 
-                      className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.06] transition-all text-sm"
+                      {...register("email")}
+                      className={`w-full bg-white/[0.03] border ${errors.email ? 'border-red-500/50 focus:border-red-500/50' : 'border-white/5 focus:border-white/20'} rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:bg-white/[0.06] transition-all text-sm`}
                       placeholder="john@example.com"
                     />
+                    {errors.email && (
+                      <p className="mt-2 text-[10px] text-red-400 flex items-center gap-1 font-mono">
+                        <AlertCircle className="w-3 h-3" /> {errors.email.message}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-[9px] font-mono font-medium text-white/40 mb-2 uppercase tracking-widest px-1">Message</label>
                   <textarea 
-                    name="message" 
                     id="message" 
-                    required 
                     rows={4}
-                    className="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.06] transition-all resize-none text-sm"
+                    {...register("message")}
+                    className={`w-full bg-white/[0.03] border ${errors.message ? 'border-red-500/50 focus:border-red-500/50' : 'border-white/5 focus:border-white/20'} rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:bg-white/[0.06] transition-all resize-none text-sm`}
                     placeholder="Tell me about your project..."
                   />
+                  {errors.message && (
+                    <p className="mt-2 text-[10px] text-red-400 flex items-center gap-1 font-mono">
+                      <AlertCircle className="w-3 h-3" /> {errors.message.message}
+                    </p>
+                  )}
                 </div>
                 
                 <div className="flex justify-start pt-2">
                   <Magnetic>
                     <button 
                       type="submit" 
-                      disabled={status === "submitting"}
+                      disabled={isSubmitting}
                       className="px-10 py-4 bg-white text-black font-bold rounded-xl hover:bg-neutral-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[10px] tracking-[0.2em] uppercase"
                     >
-                      {status === "submitting" ? "Sending..." : "Send Message"}
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
                   </Magnetic>
                 </div>
-
-                {status === "success" && (
-                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-400 mt-6 font-mono text-[10px] tracking-wider">
-                    {">"} MESSAGE SENT_SUCCESSFULLY
-                  </motion.p>
-                )}
-                {status === "error" && (
-                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-400 mt-6 font-mono text-[10px] tracking-wider">
-                    {">"} ERROR_SENDING_MESSAGE
-                  </motion.p>
-                )}
               </form>
             </motion.div>
           </motion.div>
