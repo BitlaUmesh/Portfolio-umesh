@@ -7,6 +7,7 @@ import Grain from "@/components/Grain";
 import TerminalOverlay from "@/components/TerminalOverlay";
 import dynamic from "next/dynamic";
 import { Toaster } from "sonner";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const SmoothScroll = dynamic(() => import("@/components/SmoothScroll"), {
   ssr: false,
@@ -72,6 +73,7 @@ export default function RootLayout({
           <TerminalOverlay />
           {children}
         </SmoothScroll>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"} />
       </body>
     </html>
   );

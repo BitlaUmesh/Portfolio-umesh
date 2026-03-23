@@ -9,6 +9,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -49,16 +50,19 @@ export default function Contact() {
         toast.success("Transmission successful", {
           description: "Message delivered to the mainframe. I'll be in touch soon.",
         });
+        sendGAEvent({ event: "generate_lead", value: "contact_form_success" });
         reset();
       } else {
         toast.error("Transmission failed", {
           description: "Could not deliver the message. Check your connection and try again.",
         });
+        sendGAEvent({ event: "form_error", value: "contact_form_failed" });
       }
     } catch {
       toast.error("Transmission error", {
         description: "An unexpected anomaly occurred. Please try again later.",
       });
+      sendGAEvent({ event: "form_error", value: "contact_form_exception" });
     } finally {
       setIsSubmitting(false);
     }
@@ -89,6 +93,7 @@ export default function Contact() {
                   href="https://github.com/BitlaUmesh" 
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => sendGAEvent({ event: 'click', value: 'github_link' })}
                   className="group flex items-center gap-3 px-6 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white/60 hover:text-white hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300"
                 >
                   <Github className="w-5 h-5 transition-transform group-hover:scale-110" />
@@ -101,6 +106,7 @@ export default function Contact() {
                   href="https://linkedin.com/in/bitla-umesh-kumar" 
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => sendGAEvent({ event: 'click', value: 'linkedin_link' })}
                   className="group flex items-center gap-3 px-6 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white/60 hover:text-white hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300"
                 >
                   <Linkedin className="w-5 h-5 transition-transform group-hover:scale-110" />
